@@ -6,7 +6,7 @@ import ru.netology.repository.ProductRepository;
 import org.mockito.Mockito;
 
 import static org.mockito.Mockito.*;
-import  static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class ProductManagerTest {
     ProductRepository repo = Mockito.mock(ProductRepository.class);
@@ -23,6 +23,30 @@ public class ProductManagerTest {
 
 
         Product[] actual = manager.searchBy("iPhone");
+        Product[] expected = {phone1, phone2};
+
+        assertArrayEquals(expected, actual);
+    }
+
+    @Test
+    public void ShouldSearchByAuthor() {
+        Product[] products = {book1, book2, phone1, phone2};
+        doReturn(products).when(repo).getProducts();
+
+
+        Product[] actual = manager.searchBy("Замятин");
+        Product[] expected = {book1};
+
+        assertArrayEquals(expected, actual);
+    }
+
+    @Test
+    public void ShouldSearchByManufacturer() {
+        Product[] products = {book1, book2, phone1, phone2};
+        doReturn(products).when(repo).getProducts();
+
+
+        Product[] actual = manager.searchBy("Apple");
         Product[] expected = {phone1, phone2};
 
         assertArrayEquals(expected, actual);

@@ -1,5 +1,7 @@
 package ru.netology.domain;
 
+import ru.netology.repository.ProductRepository;
+
 public class Product {
     protected int id;
     protected String name;
@@ -17,5 +19,9 @@ public class Product {
 
     public int getId() {
         return id;
+    }
+
+    public boolean matches(String search) {
+        return getName().contains(search);
     }
 }
