@@ -15,7 +15,20 @@ public class ProductManagerTest {
     Product phone2 = new Smartphone(4, "Apple", "iPhone-5", 15000);
 
     @Test
-    public void ShouldSearch() {
+    public void ShouldSearchOneProduct() {
+        manager.add(book1);
+        manager.add(book2);
+        manager.add(phone1);
+        manager.add(phone2);
+
+        Product[] actual = manager.searchBy("Мы");
+        Product[] expected = {book1};
+
+        assertArrayEquals(expected, actual);
+    }
+
+    @Test
+    public void ShouldSearchSeveralProducts() {
         manager.add(book1);
         manager.add(book2);
         manager.add(phone1);
@@ -23,6 +36,19 @@ public class ProductManagerTest {
 
         Product[] actual = manager.searchBy("iPhone");
         Product[] expected = {phone1, phone2};
+
+        assertArrayEquals(expected, actual);
+    }
+
+    @Test
+    public void ShouldSearchNonExistentProduct() {
+        manager.add(book1);
+        manager.add(book2);
+        manager.add(phone1);
+        manager.add(phone2);
+
+        Product[] actual = manager.searchBy("Samsung");
+        Product[] expected = {};
 
         assertArrayEquals(expected, actual);
     }
